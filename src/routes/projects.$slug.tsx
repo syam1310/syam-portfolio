@@ -211,9 +211,14 @@ export const Route = createFileRoute("/projects/$slug")({
       ? [
           { title: `${loaderData.name} — Shyam Prakash Patel` },
           { name: "description", content: loaderData.tagline },
+          { name: "robots", content: "index,follow" },
           { property: "og:title", content: `${loaderData.name} — Case study` },
           { property: "og:description", content: loaderData.tagline },
+          { property: "og:url", content: `https://syam-portfolio-navy.vercel.app/projects/${loaderData.slug}` },
         ]
+      : [],
+    links: loaderData
+      ? [{ rel: "canonical", href: `https://syam-portfolio-navy.vercel.app/projects/${loaderData.slug}` }]
       : [],
   }),
   component: CaseStudyPage,

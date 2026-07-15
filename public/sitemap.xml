@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://syam-portfolio-navy.vercel.app/</loc>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://syam-portfolio-navy.vercel.app/projects/banking-microservices</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://syam-portfolio-navy.vercel.app/projects/easy-school</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://syam-portfolio-navy.vercel.app/projects/shop-application</loc>
+    <priority>0.8</priority>
+  </url>
+</urlset>

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://syam-portfolio-navy.vercel.app/sitemap.xml
