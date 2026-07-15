@@ -12,6 +12,48 @@ import {
 } from "lucide-react";
 
 export const Route = createFileRoute("/")({
+  head: () => ({
+    title: "Shyam Prakash Patel | Backend Engineer Portfolio",
+    meta: [
+      {
+        name: "description",
+        content:
+          "Portfolio of Shyam Prakash Patel, a backend engineer focused on Java, Spring Boot, microservices, REST APIs, and scalable enterprise systems.",
+      },
+      {
+        name: "keywords",
+        content:
+          "Shyam Patel portfolio, Shyam Prakash Patel, Java backend engineer, Spring Boot portfolio, backend engineer India, microservices portfolio",
+      },
+      {
+        name: "robots",
+        content: "index,follow,max-snippet:-1,max-image-preview:large",
+      },
+      {
+        property: "og:title",
+        content: "Shyam Prakash Patel | Backend Engineer Portfolio",
+      },
+      {
+        property: "og:description",
+        content:
+          "Explore the portfolio of Shyam Prakash Patel, a backend engineer building high-throughput Java and Spring Boot systems.",
+      },
+      {
+        property: "og:type",
+        content: "website",
+      },
+      {
+        name: "twitter:title",
+        content: "Shyam Prakash Patel | Backend Engineer Portfolio",
+      },
+      {
+        name: "twitter:description",
+        content:
+          "Backend engineer portfolio covering Java, Spring Boot, microservices, and enterprise APIs.",
+      },
+    ],
+    links: [{ rel: "canonical", href: "/" }],
+  }),
   component: Portfolio,
 });
 
@@ -159,7 +201,7 @@ function Hero() {
           <span className="text-gradient">Patel.</span>
         </h1>
         <p className="mt-8 max-w-2xl text-lg leading-relaxed text-muted-foreground md:text-xl">
-          Backend engineer building{" "}
+          Portfolio of <span className="text-foreground">Shyam Prakash Patel</span>, a backend engineer building{" "}
           <span className="text-foreground">Spring Boot microservices</span> and{" "}
           <span className="text-foreground">high-throughput REST APIs</span>{" "}
           that power enterprise ALM platforms for Fortune 500 customers.

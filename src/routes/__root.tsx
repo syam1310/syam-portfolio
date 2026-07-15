@@ -83,7 +83,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         content:
           "Backend engineer with 3+ years building Spring Boot microservices and REST APIs for Fortune 500 clients. Java, distributed systems, and performance at scale.",
       },
+      {
+        name: "keywords",
+        content:
+          "Shyam Patel portfolio, Shyam Prakash Patel, Java backend engineer, Spring Boot microservices, REST API engineer, software engineer portfolio",
+      },
       { name: "author", content: "Shyam Prakash Patel" },
+      { name: "robots", content: "index,follow,max-snippet:-1,max-image-preview:large" },
       { property: "og:title", content: "Shyam Prakash Patel — Backend Engineer (Java · Spring Boot)" },
       {
         property: "og:description",
@@ -100,6 +106,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     links: [
       { rel: "stylesheet", href: appCss },
       { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "canonical", href: "/" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
@@ -119,6 +126,32 @@ function RootShell({ children }: { children: ReactNode }) {
     <html lang="en">
       <head>
         <HeadContent />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Person",
+              name: "Shyam Prakash Patel",
+              jobTitle: "Backend Engineer",
+              url: "/",
+              description:
+                "Backend engineer specializing in Java, Spring Boot, microservices, and high-throughput REST APIs.",
+              knowsAbout: [
+                "Java",
+                "Spring Boot",
+                "Microservices",
+                "REST APIs",
+                "Distributed Systems",
+                "PostgreSQL",
+              ],
+              sameAs: [
+                "https://github.com/syam1310",
+                "https://leetcode.com/u/Syam131025/",
+              ],
+            }),
+          }}
+        />
       </head>
       <body>
         {children}
