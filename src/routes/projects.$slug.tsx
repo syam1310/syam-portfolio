@@ -237,7 +237,7 @@ function CaseStudyPage() {
           to="/"
           className="inline-flex items-center gap-2 font-mono text-sm text-muted-foreground transition-colors hover:text-primary"
         >
-          <ArrowLeft className="h-4 w-4" /> back to portfolio
+          <ArrowLeft className="h-4 w-4" /> back
         </Link>
 
         {/* Header */}

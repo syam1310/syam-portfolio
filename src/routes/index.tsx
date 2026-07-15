@@ -1,3 +1,4 @@
+import { useMemo, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   ArrowUpRight,
@@ -368,46 +369,93 @@ function Skills() {
   );
 }
 
+function projectMatchesQuery(
+  project: (typeof PROJECTS)[number],
+  query: string,
+) {
+  if (!query) return true;
+  const normalizedQuery = query.trim().toLowerCase();
+  const haystack = [
+    project.name,
+    project.desc,
+    project.tag,
+    project.slug,
+    ...project.tech,
+  ]
+    .join(" ")
+    .toLowerCase();
+
+  return haystack.includes(normalizedQuery);
+}
+
 function Projects() {
+  const [query, setQuery] = useState("");
+
+  const filteredProjects = useMemo(
+    () => PROJECTS.filter((project) => projectMatchesQuery(project, query)),
+    [query],
+  );
+
   return (
     <section id="projects" className="mx-auto max-w-6xl px-6 py-24">
       <SectionLabel n="04." title="Selected projects" />
-      <div className="grid gap-6 md:grid-cols-3">
-        {PROJECTS.map((p, i) => (
-          <Link
-            key={p.name}
-            to="/projects/$slug"
-            params={{ slug: p.slug }}
-            className="group relative flex flex-col overflow-hidden rounded-xl border border-border bg-card/50 p-6 transition-all hover:-translate-y-1 hover:border-primary/50 hover:shadow-[var(--shadow-elegant)]"
-          >
-            <div className="flex items-center justify-between">
-              <span className="font-mono text-xs text-muted-foreground">
-                0{i + 1} / {p.tag}
-              </span>
-              <ArrowUpRight className="h-5 w-5 text-muted-foreground transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-primary" />
-            </div>
-            <h3 className="font-display mt-6 text-xl font-semibold group-hover:text-primary">
-              {p.name}
-            </h3>
-            <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">
-              {p.desc}
-            </p>
-            <div className="mt-6 flex flex-wrap gap-1.5">
-              {p.tech.map((t) => (
-                <span
-                  key={t}
-                  className="rounded border border-border/70 bg-background/40 px-2 py-0.5 font-mono text-[11px] text-muted-foreground"
-                >
-                  {t}
-                </span>
-              ))}
-            </div>
-            <span className="mt-6 font-mono text-xs text-primary opacity-0 transition-opacity group-hover:opacity-100">
-              read case study →
-            </span>
-          </Link>
-        ))}
+
+      <div className="mb-8 max-w-3xl">
+        <label htmlFor="project-search" className="sr-only">
+          Search projects
+        </label>
+        <input
+          id="project-search"
+          type="search"
+          value={query}
+          onChange={(event) => setQuery(event.target.value)}
+          placeholder="Search by project name, tag, tech, or description"
+          className="w-full rounded-2xl border border-border bg-background/80 px-4 py-3 text-sm text-foreground outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"
+        />
       </div>
+
+      {filteredProjects.length === 0 ? (
+        <div className="rounded-2xl border border-border bg-card/50 p-10 text-center text-sm text-muted-foreground">
+          No projects match “{query}”. Try a different keyword.
+        </div>
+      ) : (
+        <div className="grid gap-6 md:grid-cols-3">
+          {filteredProjects.map((p, i) => (
+            <Link
+              key={p.name}
+              to="/projects/$slug"
+              params={{ slug: p.slug }}
+              className="group relative flex flex-col overflow-hidden rounded-xl border border-border bg-card/50 p-6 transition-all hover:-translate-y-1 hover:border-primary/50 hover:shadow-[var(--shadow-elegant)]"
+            >
+              <div className="flex items-center justify-between">
+                <span className="font-mono text-xs text-muted-foreground">
+                  0{i + 1} / {p.tag}
+                </span>
+                <ArrowUpRight className="h-5 w-5 text-muted-foreground transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-primary" />
+              </div>
+              <h3 className="font-display mt-6 text-xl font-semibold group-hover:text-primary">
+                {p.name}
+              </h3>
+              <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">
+                {p.desc}
+              </p>
+              <div className="mt-6 flex flex-wrap gap-1.5">
+                {p.tech.map((t) => (
+                  <span
+                    key={t}
+                    className="rounded border border-border/70 bg-background/40 px-2 py-0.5 font-mono text-[11px] text-muted-foreground"
+                  >
+                    {t}
+                  </span>
+                ))}
+              </div>
+              <span className="mt-6 font-mono text-xs text-primary opacity-0 transition-opacity group-hover:opacity-100">
+                read case study →
+              </span>
+            </Link>
+          ))}
+        </div>
+      )}
     </section>
   );
 }
